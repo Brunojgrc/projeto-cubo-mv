@@ -36,7 +36,8 @@
 					<td><%=lista.get(i).getFone()%></td>
 					<td><%=lista.get(i).getEmail()%></td>
 					<td><%=lista.get(i).getCheckList()%></td>
-					<td><a href="javascript: confirmar(<%=lista.get(i).getIdcontatos() %>)" class=botao-delete>Excluir</a>
+					<td><a href="select?idcontatos=<%=lista.get(i).getIdcontatos()%>" class="botao-acesso">Editar</a></td>
+					<td><a href="javascript: confirmar(<%=lista.get(i).getIdcontatos() %>)" class=botao-delete>Excluir</a></td>
 				</tr>
 			<%} %>
 		</tbody>

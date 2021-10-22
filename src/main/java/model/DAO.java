@@ -6,6 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
+import com.mysql.cj.protocol.Resultset;
+
 public class DAO {
 	/* Módulo de conexão */
 
@@ -92,6 +94,50 @@ public class DAO {
 			return null;
 		}
 	}
+	
+	/*CRUD UPDATE */
+	
+	public void selecionarContato(JavaBeans contato) {
+		String readUpdate= "select * from contatos where idcontatos=?";
+				try {
+					Connection conexao = conectar();
+					PreparedStatement pst = conexao.prepareStatement(readUpdate);
+					pst.setString(1,contato.getIdcontatos());
+					ResultSet rs = pst.executeQuery();
+					//setar as variáveis JavaBeans.
+					while(rs.next()) {
+						contato.setIdcontatos(rs.getString(1));
+						contato.setNome(rs.getString(2));
+						contato.setCpf(rs.getString(3));
+						contato.setFone(rs.getString(4));
+						contato.setEmail(rs.getString(5));
+						contato.setCheckList(rs.getString(6));
+					}
+					conexao.close();
+				} catch (Exception e) {
+					System.out.println(e);
+	
+				}
+	}
+	//Editar o contato
+	public void alterarContato(JavaBeans contato) {
+		String create = "update contatos set nome=?, cpf=?, fone=?, email=?, checkList=? where idcontato=?";
+		try {
+			Connection conexao = conectar();
+			PreparedStatement pst = conexao.prepareStatement(create);
+			pst.setString(1,contato.getNome());
+			pst.setString(2,contato.getCpf());
+			pst.setString(3,contato.getFone());
+			pst.setString(4,contato.getEmail());
+			pst.setString(5,contato.getCheckList());
+			pst.executeUpdate();
+			conexao.close();
+			
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+	}
+	
 	
 	/* CRUD DELETE */
 	

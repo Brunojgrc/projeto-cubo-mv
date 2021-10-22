@@ -43,6 +43,10 @@ public class Controller extends HttpServlet {
 			contatos(request, response);
 		} else if (action.equals("/inserir")) {
 			criarContato(request, response);
+		} else if (action.equals("/select")) {
+			listarContato(request, response);
+		} else if (action.equals("/update")) {
+			editarContato(request, response);
 		} else if (action.equals("/delete")) {
 			removerContato(request, response);
 		} else {
@@ -81,7 +85,7 @@ public class Controller extends HttpServlet {
 
 	}
 
-	/* Listar Contatos */
+	/* Contatos */
 
 	protected void contatos(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -108,6 +112,43 @@ public class Controller extends HttpServlet {
 		 */
 	}
 
+	/* Editar contato */
+
+	protected void listarContato(HttpServletRequest request, HttpServletResponse response) 
+			throws ServletException, IOException {
+		// recebimento do contato a ser recebido (validador.js)
+		String idcontatos = request.getParameter("idcontatos");
+		// setar a variável idcontatos JavaBeans.
+		contato.setIdcontatos(idcontatos);
+		//Executar o metodo selecionar contato
+		dao.selecionarContato(contato);
+		//setar os atributos com o coteundo do JavaBeans
+		request.setAttribute("idcontatos", contato.getIdcontatos());
+		request.setAttribute("nome", contato.getNome());
+		request.setAttribute("cpf", contato.getCpf());
+		request.setAttribute("fone", contato.getFone());
+		request.setAttribute("email", contato.getEmail());
+		request.setAttribute("checkList", contato.getCheckList());
+		RequestDispatcher rd = request.getRequestDispatcher("editar.jsp");
+		rd.forward(request, response);
+		
+		//redirecionar para agenda.jps atualizado
+		response.sendRedirect("main");
+	
+	}
+	
+	protected void editarContato(HttpServletRequest request, HttpServletResponse response) 
+			throws ServletException, IOException {
+		contato.setNome(request.getParameter("nome"));
+		contato.setCpf(request.getParameter("cpf"));
+		contato.setFone(request.getParameter("fone"));
+		contato.setEmail(request.getParameter("email"));
+		contato.setCheckList(request.getParameter("checkList"));
+		
+		//exceutar contato
+		dao.alterarContato(contato);
+		
+	}
 	/* Remover contato */
 
 	protected void removerContato(HttpServletRequest request, HttpServletResponse response)

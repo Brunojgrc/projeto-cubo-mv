@@ -41,6 +41,15 @@ h1 {
 	
 }
 
+.box-idcontato {
+	width: 200px;
+	padding: 5px;
+	margin-bottom: 10px;
+	border: 1px solid #ff0000;
+	border-radius: 5px;
+	
+}
+
 #tabela {
 	margin-top: 30px;
 	border-collapse: collapse;
