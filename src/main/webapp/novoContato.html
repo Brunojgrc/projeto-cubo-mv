@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="utf-8">
+<title>Agenda e Lista Café da Manhã</title>
+<link rel="icon" href="img/chip_icon.png">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<h1>Novo Colaborador</h1>
+	<form name="formContato" action="inserir">
+		<table>
+			<tr>
+				<td><input type="text" class="box-input-maior" name="nome"
+					placeholder="Nome" required></td>
+			</tr>
+			<tr></tr>
+			<tr>
+				<td><input type="text" class="box-input-menor" name="cpf" placeholder="CPF" required></td>
+			</tr>
+			<tr>
+				<td><input type="text" class="box-input-menor" name="fone" placeholder="Fone" required></td>
+			</tr>
+			<tr>
+				<td><input type="email" class="box-input-maior" name="email"
+					placeholder="Email"></td>
+			</tr>
+			<tr>
+				<td><input type="text" class="box-input-maior" name="checkList" placeholder="Checklist" required></td>
+			</tr>
+		</table>
+		<input type="button" class="botao-acesso" value="Adicionar" onclick="validar()">
+	</form>
+	<script src="scripts/validador.js"></script>
+</body>
+</html>
