@@ -132,13 +132,12 @@ public class Controller extends HttpServlet {
 		RequestDispatcher rd = request.getRequestDispatcher("editar.jsp");
 		rd.forward(request, response);
 		
-		//redirecionar para agenda.jps atualizado
-		response.sendRedirect("main");
-	
+
 	}
 	
 	protected void editarContato(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
+		contato.setIdcontatos(request.getParameter("idcontato"));
 		contato.setNome(request.getParameter("nome"));
 		contato.setCpf(request.getParameter("cpf"));
 		contato.setFone(request.getParameter("fone"));
@@ -147,6 +146,9 @@ public class Controller extends HttpServlet {
 		
 		//exceutar contato
 		dao.alterarContato(contato);
+		//redirecionar para agenda.jps atualizado
+		response.sendRedirect("main");
+	
 		
 	}
 	/* Remover contato */
